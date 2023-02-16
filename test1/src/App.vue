@@ -1,9 +1,10 @@
 <template>
 
-  <div class="black-bg">
+  <div class="black-bg" v-if="modalopen == true">
     <div class="white-bg">
       <h4>상세페이지임</h4>
       <p>상세페이지 내용임</p>
+      <button @click="modalopen=fasle" >닫기</button>
     </div>
   </div>
 
@@ -15,10 +16,11 @@
 
   <img alt="Vue logo" src="./assets/logo.png">
   <div  v-for = "(product,i) in products" :key="i">
-    <img v-bind:src="product.img" class = "room-img">
-    <h4>{{product.name}}</h4>
+    <img v-bind:src="product.img" class = "room-img" @click="modalopen=true">
+    <h4 @click="modalopen=true">{{product.name}}</h4>
     <p>{{product.price}} 만원</p>
-    <button @click="product.report++">허위매물신고</button> <span>신고수 : {{product.report[i]}}</span>
+    <button @click="product.report++">허위매물신고</button> 
+    <span>신고수 : {{product.report}}</span>
   </div>
 
 </template>
@@ -30,20 +32,24 @@ export default {
   name: 'App',
  data() {
     return {
+      modalopen: false,
       products: [
         {
+          id : 0,
           name: "역삼동 원룸",
           price: 60,
           report: 0,
           img: require("./assets/room0.jpg"),
         },
         {
+          id : 1,
           name: "천호동 원룸",
           price: 70,
           report: 0,
           img: require("./assets/room1.jpg"),
         },
         {
+          id : 2,
           name: "마포구 원룸",
           price: 100,
           report: 0,
@@ -71,7 +77,9 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-
+.mouseover{
+  color:blanchedalmond;
+}
 .menu{
   background : darkslateblue;
   padding: 15px;
